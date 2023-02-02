@@ -15,4 +15,5 @@ Imports:
   gplots,
   ropls,
   matrixStats,
-  ggpubr
+  ggpubr,
+  heatmap3

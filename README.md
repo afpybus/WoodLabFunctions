@@ -45,7 +45,19 @@ This data set is derived from eight mice (8 rows) that received three
 rmTBI. We measured 32 different proteins (32 columns) after injury and
 were interested in whether one of the proteins, Iba1 (a microglial
 activation marker), correlated with the rest of the measured proteins.
-The other 31 proteins are cytokines, immune signaling proteins.
+The other 31 proteins are cytokines, immune signaling proteins. Let’s
+take our first look at the data by creating a heatmap:
+
+``` r
+hm = heatmap_wl(rmTBI,
+                mar=c(10,2),  # set margins to re-size the heatmap
+                clust_r = TRUE, # cluster rows by euclidean distance
+                clust_c = TRUE, # cluster cols by euclidean distance
+                labRow=NA, # remove row labels
+                cex_c=0.5) # re-size col labels to fit all of them
+```
+
+![](tools/README-Heatmap-1.png)
 
 ### Principal Component Analysis (PCA)
 
@@ -110,7 +122,7 @@ PLSR = ropls::opls(cytokines,
 #> 8 samples x 31 variables and 1 response
 #> standard scaling of predictors and response(s)
 #>       R2X(cum) R2Y(cum) Q2(cum) RMSEE pre ort pR2Y  pQ2
-#> Total    0.705    0.889   0.628 0.114   2   0 0.25 0.05
+#> Total    0.705    0.889   0.628 0.114   2   0  0.3 0.15
 ```
 
 ![](tools/README-Run%20PLSR-1.png)
@@ -187,7 +199,7 @@ loadings_chart(loadings=PLSR_rot30$P1,
 
 ### PLSR with Leave One Out Cross Validation
 
-To ensure the results of the model are not heavilty dependent on any one
+To ensure the results of the model are not heavily dependent on any one
 sample, we will conduct a leave one out cross validation with 25
 iterations. We’ll then add error bars depicting the standard deviation
 across all iterations.
@@ -200,7 +212,7 @@ PLSR_LOOCV = opls_LOOCV(cytokines,
 #> 8 samples x 31 variables and 1 response
 #> standard scaling of predictors and response(s)
 #>       R2X(cum) R2Y(cum) Q2(cum) RMSEE pre ort pR2Y  pQ2
-#> Total    0.705    0.889   0.628 0.114   2   0  0.1 0.15
+#> Total    0.705    0.889   0.628 0.114   2   0 0.15 0.05
 ```
 
 ![](tools/README-PLSR%20with%20LOOCV-1.png)
