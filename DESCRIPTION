@@ -1,0 +1,14 @@
+Package: WoodLabFunctions
+Title: A Set of Commonly Used Functions in the Wood Lab at GT
+Version: 0.0.0.9000
+Authors@R: 
+    person("Alyssa", "Pybus", , "afpybus@gmail.com", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0002-9722-3977"))
+Description: TBD
+License: `use_mit_license()`
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3
+Imports: 
+  ggplot2,
+  gplots
