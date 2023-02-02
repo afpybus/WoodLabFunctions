@@ -128,5 +128,5 @@ PLSR_LOOCV_rot30 = rotate_opls_LOOCV(PLSR_LOOCV,degrees=30)
 loadings_chart_sd(loadings=PLSR_LOOCV_rot30$P1, 
                   sd = PLSR_LOOCV_rot30$sd_P1_LOOCV,
                   component_str = "LV1",
-                  lim = 1.1) # set a higher axis limit to see full error bars
+                  lim = 1.2) # set a higher axis limit to see full error bars
 ```

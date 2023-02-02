@@ -25,7 +25,8 @@ scores_plot <- function(T1,T2,color,color.str="",analysis="Scores Plot",plot.tit
     ggtitle(plot.title)+
     xlim(-1.1*max(abs(T1)),1.1*max(abs(T1)))+
     ylim(-1.1*max(abs(T2)),1.1*max(abs(T2)))+
-    theme(panel.background = element_rect(fill = 'white',colour='black'), 
+    theme(panel.background = element_rect(fill = 'white',colour='black'),
+          panel.grid = element_blank(),
           text = element_text(size=20),
           panel.border = element_blank(),
           plot.title = element_text(hjust = 0.5),
@@ -68,6 +69,7 @@ scores_plot_gradient <- function(T1,T2,color,color.str="",analysis="Scores Plot"
     xlim(-1.1*max(abs(T1)),1.1*max(abs(T1)))+
     ylim(-1.1*max(abs(T2)),1.1*max(abs(T2)))+
     theme(panel.background = element_rect(fill = 'white',colour='black'), 
+          panel.grid = element_blank(),
           text = element_text(size=20),
           panel.border= element_blank(),
           plot.title = element_text(hjust = 0.5),
@@ -108,6 +110,7 @@ scores_plot_ellipse <- function(T1,T2,color,color.str="",analysis="Scores Plot",
     xlim(-1.1*max(abs(T1)),1.1*max(abs(T1)))+
     ylim(-1.1*max(abs(T2)),1.1*max(abs(T2)))+
     theme(panel.background = element_rect(fill = 'white',colour='black'), 
+          panel.grid = element_blank(),
           text = element_text(size=20),
           panel.border= element_blank(),
           plot.title = element_text(hjust = 0.5),

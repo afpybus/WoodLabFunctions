@@ -109,8 +109,8 @@ PLSR = ropls::opls(cytokines,
 #> PLS
 #> 8 samples x 31 variables and 1 response
 #> standard scaling of predictors and response(s)
-#>       R2X(cum) R2Y(cum) Q2(cum) RMSEE pre ort pR2Y pQ2
-#> Total    0.705    0.889   0.628 0.114   2   0 0.25 0.1
+#>       R2X(cum) R2Y(cum) Q2(cum) RMSEE pre ort pR2Y  pQ2
+#> Total    0.705    0.889   0.628 0.114   2   0 0.25 0.05
 ```
 
 ![](tools/README-Run%20PLSR-1.png)
@@ -199,8 +199,8 @@ PLSR_LOOCV = opls_LOOCV(cytokines,
 #> PLS
 #> 8 samples x 31 variables and 1 response
 #> standard scaling of predictors and response(s)
-#>       R2X(cum) R2Y(cum) Q2(cum) RMSEE pre ort pR2Y pQ2
-#> Total    0.705    0.889   0.628 0.114   2   0  0.3 0.1
+#>       R2X(cum) R2Y(cum) Q2(cum) RMSEE pre ort pR2Y  pQ2
+#> Total    0.705    0.889   0.628 0.114   2   0  0.1 0.15
 ```
 
 ![](tools/README-PLSR%20with%20LOOCV-1.png)
@@ -210,7 +210,7 @@ PLSR_LOOCV_rot30 = rotate_opls_LOOCV(PLSR_LOOCV,degrees=30)
 loadings_chart_sd(loadings=PLSR_LOOCV_rot30$P1, 
                   sd = PLSR_LOOCV_rot30$sd_P1_LOOCV,
                   component_str = "LV1",
-                  lim = 1.1) # set a higher axis limit to see full error bars
+                  lim = 1.2) # set a higher axis limit to see full error bars
 ```
 
 ![](tools/README-PLSR%20LOOCV%20Loadings-1.png)
