@@ -41,7 +41,7 @@ scatter_reg <- function(x,y,
   if(showP== FALSE){if(p_y==1){r_y=p_y};p_x = NaN}
   
   p <- ggplot(dataReg, aes(x=x, y=y)) +
-    geom_smooth(method=method,se=FALSE,color=line_color,linetype=linetype, size = line_size)+
+    geom_smooth(method=method,formula=y~x,se=FALSE,color=line_color,linetype=linetype, size = line_size)+
     geom_point(size=point_size,color=point_color)+
     theme(panel.background = element_rect(fill = 'white'),
           text = element_text(size=20),
