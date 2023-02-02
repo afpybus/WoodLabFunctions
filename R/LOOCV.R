@@ -125,8 +125,8 @@ rotate_opls_LOOCV <- function(opls_LOOCV_out,degrees=0,swap=F,flip_y=F,flip_x=F)
   names(P1_LOOCV)=names(P1)
   P2_LOOCV=colMeans(P2_mat)
   names(P2_LOOCV)=names(P2)
-  stdevLV1=colSds(P1_mat) 
-  stdevLV2=colSds(P2_mat)
+  stdevLV1=matrixStats::colSds(P1_mat) 
+  stdevLV2=matrixStats::colSds(P2_mat)
   
   out <- list()
   out$T1 <- T1
