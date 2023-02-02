@@ -5,6 +5,15 @@ output:
     variant: markdown_github
 ---
 
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "tools/README-",
+  warning = FALSE
+)
+```
+
 # WoodLabFunctions by afpybus
 
 A collection of commonly used functions by the grad students, lab techs, and undergrads of the Wood Lab.
