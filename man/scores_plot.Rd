@@ -2,7 +2,7 @@
 % Please edit documentation in R/scores_plot.R
 \name{scores_plot}
 \alias{scores_plot}
-\title{Make a Scores Plot}
+\title{Scores Plot for Multivariate Analyses (PCA,PLS)}
 \usage{
 scores_plot(
   T1,

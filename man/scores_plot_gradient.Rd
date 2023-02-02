@@ -2,13 +2,13 @@
 % Please edit documentation in R/scores_plot.R
 \name{scores_plot_gradient}
 \alias{scores_plot_gradient}
-\title{Make a Scores Plot with Gradient Colored Points}
+\title{Scores Plot with Gradient Colored Points}
 \usage{
 scores_plot_gradient(
   T1,
   T2,
   color,
-  color.str,
+  color.str = "",
   analysis = "Scores Plot",
   plot.title = NULL
 )

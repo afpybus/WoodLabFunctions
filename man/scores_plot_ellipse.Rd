@@ -2,7 +2,7 @@
 % Please edit documentation in R/scores_plot.R
 \name{scores_plot_ellipse}
 \alias{scores_plot_ellipse}
-\title{Make a Scores Plot with Confidence Ellipses}
+\title{Scores Plot with Confidence Ellipses}
 \usage{
 scores_plot_ellipse(
   T1,

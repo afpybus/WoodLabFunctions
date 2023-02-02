@@ -11,7 +11,7 @@ rotate_opls(plsOut, degrees = 0, swap = F, flip_y = F, flip_x = F)
 Ex. plsOut = opls(data,predI=2) for Principal Component Analysis
 plsOut = opls(data,y=pheno,predI=2) for PLS}
 
-\item{degrees}{default 0; numeric specifying how many degrees to rotate clockwise}
+\item{degrees}{default 0; specified degrees of clockwise rotation}
 
 \item{swap}{default FALSE; set to TRUE to swap x and y axes}
 
@@ -20,10 +20,12 @@ plsOut = opls(data,y=pheno,predI=2) for PLS}
 \item{flip_x}{default FALSE; set to TRUE to flip data across x axis}
 }
 \value{
-A list of rotated scores, loadings, and the rotation matrix used.
-out$T1 and out$T2 call the rotated scores in the 1st and 2nd component, respectively
-out$P1 and out$P2 call the rotated loadings in the 1st and 2nd component, respectively
-out$rotmat calls the rotation matrix used to transform the original data
+A list with the following objects:
+T1 = scores in rotated LV1
+T2 = scores in rotated LV2
+P1 = loadings in rotated LV1
+P2 = loadings in rotated LV2
+rotmat = matrix of rotation by specified degrees
 }
 \description{
 Used to rotate scores and loadings on opls objects by specified degrees, then perform axis swaps and/or flips. Output is list of scores, loadings, and rotation matrix.

@@ -4,14 +4,16 @@
 #' @param plsOut output object from opls() function, must contain only 2 components
 #' Ex. plsOut = opls(data,predI=2) for Principal Component Analysis
 #' plsOut = opls(data,y=pheno,predI=2) for PLS
-#' @param degrees default 0; numeric specifying how many degrees to rotate clockwise
+#' @param degrees default 0; specified degrees of clockwise rotation
 #' @param swap default FALSE; set to TRUE to swap x and y axes
 #' @param flip_y default FALSE; set to TRUE to flip data across y axis
 #' @param flip_x default FALSE; set to TRUE to flip data across x axis
-#' @return A list of rotated scores, loadings, and the rotation matrix used.
-#' out$T1 and out$T2 call the rotated scores in the 1st and 2nd component, respectively
-#' out$P1 and out$P2 call the rotated loadings in the 1st and 2nd component, respectively
-#' out$rotmat calls the rotation matrix used to transform the original data
+#' @return A list with the following objects:
+#' T1 = scores in rotated LV1
+#' T2 = scores in rotated LV2
+#' P1 = loadings in rotated LV1
+#' P2 = loadings in rotated LV2
+#' rotmat = matrix of rotation by specified degrees
 #' @export
 rotate_opls <- function(plsOut,degrees=0,swap=F,flip_y=F,flip_x=F){
   #rotate by specified degrees

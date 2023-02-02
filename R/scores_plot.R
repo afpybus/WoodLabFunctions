@@ -1,4 +1,4 @@
-#' Make a Scores Plot
+#' Scores Plot for Multivariate Analyses (PCA,PLS)
 #'
 #' @description Used to create scores plot colored by your categorical variable of interest.
 #' @param T1,T2 sample scores in your two components (e.g.: T1=PC1 and T2=PC2)
@@ -11,8 +11,9 @@
 #' @export
 scores_plot <- function(T1,T2,color,color.str="",analysis="Scores Plot",plot.title=NULL){
   if(is.null(plot.title)){plot.title=analysis}
+  axis.label="Component "
   if(analysis=="PCA"){axis.label="PC"}
-  if(analysis=="PLS"){axis.label="LV"}else{axis.label="Component "}
+  if(analysis=="PLS"){axis.label="LV"}
   ScoresPlot=data.frame(T1,T2,as.factor(color))
   colnames(ScoresPlot)=c("T1","T2","color")
   plotOut <- ggplot2::ggplot(ScoresPlot, aes(x=T1, y=T2, color=as.factor(color))) + 
@@ -35,7 +36,7 @@ scores_plot <- function(T1,T2,color,color.str="",analysis="Scores Plot",plot.tit
   return(plotOut)
 }
 
-#' Make a Scores Plot with Gradient Colored Points
+#' Scores Plot with Gradient Colored Points
 #' 
 #' @description Used to create scores plot colored by quantitative variable of interest.
 #' @param T1,T2 sample scores in your two components (e.g.: T1=PC1 and T2=PC2)
@@ -46,10 +47,11 @@ scores_plot <- function(T1,T2,color,color.str="",analysis="Scores Plot",plot.tit
 #' @param plot.title Set title of the scores plot; if not given, defaults to analysis
 #' @return A ggplot2 object of the scores plot
 #' @export
-scores_plot_gradient <- function(T1,T2,color,color.str,analysis="Scores Plot",plot.title=NULL){
+scores_plot_gradient <- function(T1,T2,color,color.str="",analysis="Scores Plot",plot.title=NULL){
   if(is.null(plot.title)){plot.title=analysis}
+  axis.label="Component "
   if(analysis=="PCA"){axis.label="PC"}
-  if(analysis=="PLS"){axis.label="LV"}else{axis.label="Component "}
+  if(analysis=="PLS"){axis.label="LV"}
   breakBarColors=c(-200,seq(-1.5, 1.5, 0.01),200) #Outside numbers clip outliers. This is for zscoring.
   barColors = gplots::colorpanel(length(breakBarColors)-1, "blue", "white", "red2")
   sc = ggplot2::scale_colour_gradientn(colours = barColors, limits=c(min(color), max(color)))
@@ -76,7 +78,7 @@ scores_plot_gradient <- function(T1,T2,color,color.str,analysis="Scores Plot",pl
   return(plotOut)
 }
 
-#' Make a Scores Plot with Confidence Ellipses
+#' Scores Plot with Confidence Ellipses
 #'
 #' @description Create scores plot colored by categorical variable of interest with ellipses showing confidence level of each group.
 #' @param T1,T2 sample scores in your two components (e.g.: T1=PC1 and T2=PC2)
@@ -90,8 +92,9 @@ scores_plot_gradient <- function(T1,T2,color,color.str,analysis="Scores Plot",pl
 #' @export
 scores_plot_ellipse <- function(T1,T2,color,color.str="",analysis="Scores Plot",plot.title=NULL,level=0.95){
   if(is.null(plot.title)){plot.title=analysis}
+  axis.label="Component "
   if(analysis=="PCA"){axis.label="PC"}
-  if(analysis=="PLS"){axis.label="LV"}else{axis.label="Component "}
+  if(analysis=="PLS"){axis.label="LV"}
   ScoresPlot=data.frame(T1,T2,as.factor(color))
   colnames(ScoresPlot)=c("T1","T2","color")
   plotOut <- ggplot2::ggplot(ScoresPlot, aes(x=T1, y=T2, color=as.factor(color))) + 
