@@ -118,7 +118,7 @@ scores_plot_gradient(T1=PLSR_rot30$T1,T2=PLSR_rot30$T2,
 Now that we've roughly aligned our greatest variance in Iba1 with LV1, let's figure out what drives LV1. We will construct a loadings chart which will indicate the contribution of each cytokine to the sample scores along LV1. Highly positive "loadings" indicate correlation with Iba1 (positive LV1 scores), while negative loadings are associated with negative LV1 scores.
 
 ```{r First Loading Chart, fig.width=8, fig.height=3.2, warning=FALSE,message=FALSE}
-loadings_chart(loadings=PLSR_rot30$P1, 
+load1 = loadings_chart(loadings=PLSR_rot30$P1, 
                component_str = "LV1")
 ```
 
@@ -134,7 +134,7 @@ PLSR_LOOCV = opls_LOOCV(cytokines,
 
 ```{r PLSR LOOCV Loadings, fig.width=8, fig.height=3.3, warning=FALSE,message=FALSE}
 PLSR_LOOCV_rot30 = rotate_opls_LOOCV(PLSR_LOOCV,degrees=30)
-loadings_chart_sd(loadings=PLSR_LOOCV_rot30$P1, 
+load1_LOOCV = loadings_chart_sd(loadings=PLSR_LOOCV_rot30$P1, 
                   sd = PLSR_LOOCV_rot30$sd_P1_LOOCV,
                   component_str = "LV1",
                   lim = 1.2) # set a higher axis limit to see full error bars

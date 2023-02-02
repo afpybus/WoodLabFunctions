@@ -122,7 +122,7 @@ PLSR = ropls::opls(cytokines,
 #> 8 samples x 31 variables and 1 response
 #> standard scaling of predictors and response(s)
 #>       R2X(cum) R2Y(cum) Q2(cum) RMSEE pre ort pR2Y pQ2
-#> Total    0.705    0.889   0.628 0.114   2   0  0.5 0.2
+#> Total    0.705    0.889   0.628 0.114   2   0 0.25 0.1
 ```
 
 ![](tools/README-Run%20PLSR-1.png)
@@ -158,44 +158,11 @@ Iba1 (positive LV1 scores), while negative loadings are associated with
 negative LV1 scores.
 
 ``` r
-loadings_chart(loadings=PLSR_rot30$P1, 
+load1 = loadings_chart(loadings=PLSR_rot30$P1, 
                component_str = "LV1")
 ```
 
 ![](tools/README-First%20Loading%20Chart-1.png)
-
-    #>       [,1]
-    #>  [1,]  0.7
-    #>  [2,]  1.9
-    #>  [3,]  3.1
-    #>  [4,]  4.3
-    #>  [5,]  5.5
-    #>  [6,]  6.7
-    #>  [7,]  7.9
-    #>  [8,]  9.1
-    #>  [9,] 10.3
-    #> [10,] 11.5
-    #> [11,] 12.7
-    #> [12,] 13.9
-    #> [13,] 15.1
-    #> [14,] 16.3
-    #> [15,] 17.5
-    #> [16,] 18.7
-    #> [17,] 19.9
-    #> [18,] 21.1
-    #> [19,] 22.3
-    #> [20,] 23.5
-    #> [21,] 24.7
-    #> [22,] 25.9
-    #> [23,] 27.1
-    #> [24,] 28.3
-    #> [25,] 29.5
-    #> [26,] 30.7
-    #> [27,] 31.9
-    #> [28,] 33.1
-    #> [29,] 34.3
-    #> [30,] 35.5
-    #> [31,] 36.7
 
 ### PLSR with Leave One Out Cross Validation
 
@@ -211,54 +178,21 @@ PLSR_LOOCV = opls_LOOCV(cytokines,
 #> PLS
 #> 8 samples x 31 variables and 1 response
 #> standard scaling of predictors and response(s)
-#>       R2X(cum) R2Y(cum) Q2(cum) RMSEE pre ort pR2Y pQ2
-#> Total    0.705    0.889   0.628 0.114   2   0 0.25 0.1
+#>       R2X(cum) R2Y(cum) Q2(cum) RMSEE pre ort pR2Y  pQ2
+#> Total    0.705    0.889   0.628 0.114   2   0 0.35 0.05
 ```
 
 ![](tools/README-PLSR%20with%20LOOCV-1.png)
 
 ``` r
 PLSR_LOOCV_rot30 = rotate_opls_LOOCV(PLSR_LOOCV,degrees=30)
-loadings_chart_sd(loadings=PLSR_LOOCV_rot30$P1, 
+load1_LOOCV = loadings_chart_sd(loadings=PLSR_LOOCV_rot30$P1, 
                   sd = PLSR_LOOCV_rot30$sd_P1_LOOCV,
                   component_str = "LV1",
                   lim = 1.2) # set a higher axis limit to see full error bars
 ```
 
 ![](tools/README-PLSR%20LOOCV%20Loadings-1.png)
-
-    #>       [,1]
-    #>  [1,]  0.7
-    #>  [2,]  1.9
-    #>  [3,]  3.1
-    #>  [4,]  4.3
-    #>  [5,]  5.5
-    #>  [6,]  6.7
-    #>  [7,]  7.9
-    #>  [8,]  9.1
-    #>  [9,] 10.3
-    #> [10,] 11.5
-    #> [11,] 12.7
-    #> [12,] 13.9
-    #> [13,] 15.1
-    #> [14,] 16.3
-    #> [15,] 17.5
-    #> [16,] 18.7
-    #> [17,] 19.9
-    #> [18,] 21.1
-    #> [19,] 22.3
-    #> [20,] 23.5
-    #> [21,] 24.7
-    #> [22,] 25.9
-    #> [23,] 27.1
-    #> [24,] 28.3
-    #> [25,] 29.5
-    #> [26,] 30.7
-    #> [27,] 31.9
-    #> [28,] 33.1
-    #> [29,] 34.3
-    #> [30,] 35.5
-    #> [31,] 36.7
 
 Finally, we can assess the performance of the PLSR by computing a
 regression of Iba1 with scores on LV1. We can show this graphically
