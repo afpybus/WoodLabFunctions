@@ -16,4 +16,7 @@ Imports:
   ropls,
   matrixStats,
   ggpubr,
-  heatmap3
+  heatmap3,
+  gridExtra
+Suggests: knitr, rmarkdown
+VignetteBuilder: knitr

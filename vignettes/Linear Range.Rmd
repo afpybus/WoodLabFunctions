@@ -1,0 +1,58 @@
+---
+title: "Linear Range Analysis"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Linear Range Analysis}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "tools/LinearRange-",
+  warning = FALSE
+)
+```
+
+# Linear Range Analysis
+
+## Installation
+
+Copy and paste the following code into your R console:
+
+```{r Installation, eval = FALSE}
+# Install
+if(!require(devtools)) install.packages("devtools")
+devtools::install_github("afpybus/WoodLabFunctions")
+```
+
+Load the sample data (also available to download in csv format in data folder):
+
+```{r Load Data}
+library("WoodLabFunctions")
+data(LinearRange)
+
+LinearRange
+```
+
+Construct scatter graphs with local regression to observe ranges of linear behavior:
+
+```{r Scatter Graph, fig.width=4,fig.height=4}
+scatter_reg(x=LinearRange$Mass,y=LinearRange$pJnk,
+            xlab="Protein Mass [ug]",ylab="pJnk [a.u.]",
+            showRSQ=FALSE,showP=FALSE,
+            method="loess")
+
+```
+
+Make a panel of all analytes from a single kit / data frame:
+
+```{r Linear Range Panel, fig.height=10,fig.width=12}
+loadings = LinearRange$Mass
+analytes = LinearRange[,2:10]
+
+LinearRangePanel(analytes = analytes,loadings = loadings,xlab = "Protein Mass [ug]")
+
+```
