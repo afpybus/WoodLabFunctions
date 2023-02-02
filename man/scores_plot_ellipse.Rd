@@ -9,23 +9,24 @@ scores_plot_ellipse(
   T2,
   color,
   color.str = "",
-  analysis = "PLSDA",
+  analysis = "Scores Plot",
   plot.title = NULL,
   level = 0.95
 )
 }
 \arguments{
-\item{T1, T2}{Sample scores in your two components (e.g.: PC1 and PC2)}
+\item{T1, T2}{sample scores in your two components (e.g.: T1=PC1 and T2=PC2)}
 
-\item{color}{A character or factor array of your experimental groups by sample}
+\item{color}{string or factor variables of your experimental groups by sample}
 
-\item{color.str}{Text to label the color legend}
+\item{color.str}{default ""; a string to label the color legend}
 
-\item{analysis}{Set to "PCA" to change axis labels to PC instead of LV; defaults to "PLSDA" with LV axes; sets default plot title}
+\item{analysis}{default "Scores Plot"; updates title and axis labels; title can be superseded by plot.title
+Allowed values are "PCA" to set axis labels to "PC" or "PLS" to set axis labels to "LV"}
 
 \item{plot.title}{Set title of the scores plot; if not given, defaults to analysis}
 
-\item{level}{Confidence level of ellipse, default set to 0.95}
+\item{level}{confidence level of ellipse, default set to 0.95}
 }
 \value{
 A ggplot2 object of the scores plot

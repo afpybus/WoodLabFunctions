@@ -1,5 +1,5 @@
 Package: WoodLabFunctions
-Title: A Set of Commonly Used Functions in the Wood Lab at GT
+Title: A set of commonly-used functions in the Wood Lab at GT
 Version: 0.0.0.9000
 Authors@R: 
     person("Alyssa", "Pybus", , "afpybus@gmail.com", role = c("aut", "cre"),
