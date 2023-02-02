@@ -1,8 +1,10 @@
 ---
-title: "Linear Range Analysis"
-output:
-  md_document:
-    variant: markdown_github
+title: LinearRange
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Put the title of your vignette here}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
 ---
 
 ```{r, echo = FALSE}
