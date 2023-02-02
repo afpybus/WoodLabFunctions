@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 
 # WoodLabFunctions by afpybus
 
-A collection of commonly used functions by the grad students, lab techs, and undergrads of the Wood Lab.
+A repository of commonly used functions by the grad students, lab techs, and undergrads of the Wood Lab.
 
 ## Installation
 
@@ -56,7 +56,7 @@ hm = heatmap_wl(rmTBI,
 
 ### Principal Component Analysis (PCA)
 
-Partial least squares regression using Iba1 as a predictor variable and the cytokines as response variables is an appropriate method for exploring possible relationships. We will use the ropls package to first visualize variance in the data using a PCA then to regress the data against Iba1.
+Partial least squares regression using Iba1 as a predictor variable and the cytokines as response variables is an appropriate method for exploring possible relationships. We will use the ropls package to first visualize variance in the data using a PCA then to regress the data against Iba1 using PLSR.
 
 ```{r Run PCA}
 predictor = rmTBI$Iba1
@@ -140,3 +140,60 @@ loadings_chart_sd(loadings=PLSR_LOOCV_rot30$P1,
                   component_str = "LV1",
                   lim = 1.2) # set a higher axis limit to see full error bars
 ```
+
+Finally, we can assess the performance of the PLSR by computing a regression of Iba1 with scores on LV1. We can show this graphically using scatter_reg():
+
+```{r Scatter_reg,fig.height=4,fig.width=4}
+scatter_reg(x=PLSR_LOOCV_rot30$T1,y=predictor,
+            xlab = "Scores on LV1",
+            ylab = "Iba1 [a.u.]",
+            title = "LV1 vs Iba1")
+```
+
+
+## Linear Range Analysis
+
+Assessing the linear range of detection for multiplex ELISA kits is a key quality control step that must be completed before sample measurement. In short, the user selects a single sample and loads increasing amounts of lysate into multiple assay wells. After completion of the ELISA, the expected result is that increased total protein loading correlates with increased detection of each protein. For proteins that do not show this linear increase in detection with increases in loading, they are considered to be outside of the detectable linear range for the chosen loadings. 
+
+Let's load some example linear range data to explore. The first column contains values for mass of total protein [ug] and each subsequent column contains detected fluorescent values [a.u.] of a phospho-protein from our MAPK Luminex assay.
+
+```{r Load LR Data}
+data(LinearRange)
+
+LinearRange
+```
+
+First, let's construct an x-y scatter graph for a single measured phospho-protein to see the relationship between detected analyte and loaded total protein using scatter_reg():
+
+```{r Scatter Graph, fig.width=4,fig.height=4}
+scatter_reg(x=LinearRange$Mass,y=LinearRange$pJnk,
+            xlab="Protein Mass [ug]",ylab="pJnk [a.u.]",
+            showRSQ=FALSE,showP=FALSE,
+            method="loess")
+
+```
+
+
+The most important outcome from your linear range will be the amount of protein to load in your subsequent assays. You will want to look at the linear range of ALL measured proteins and select the loading which is appropriate for the highest number of proteins of interest. We can do this easily using LinearRangePanel().
+
+```{r Linear Range Panel, fig.height=10,fig.width=12}
+loadings = LinearRange$Mass
+analytes = LinearRange[,2:10]
+
+LinearRangePanel(analytes = analytes,loadings = loadings,xlab = "Protein Mass [ug]")
+
+```
+
+We selected a loading of 1ug, which we can display on the graphs to help assess its suitability:
+
+```{r Linear Range Panel vline, fig.height=10,fig.width=12}
+loadings = LinearRange$Mass
+analytes = LinearRange[,2:10]
+
+LinearRangePanel(analytes = analytes,loadings = loadings,xlab = "Protein Mass [ug]",xintercept = 1)
+
+```
+
+In this example, we would have high confidence in measured values for pAtf2, pMek1, pJnk, pErk1/2, pHSP27, and pStat3. p-p38 is outside of its detectable linear range.
+
+

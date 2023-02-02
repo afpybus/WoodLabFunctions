@@ -1,6 +1,6 @@
 # WoodLabFunctions by afpybus
 
-A collection of commonly used functions by the grad students, lab techs,
+A repository of commonly used functions by the grad students, lab techs,
 and undergrads of the Wood Lab.
 
 ## Installation
@@ -65,7 +65,7 @@ Partial least squares regression using Iba1 as a predictor variable and
 the cytokines as response variables is an appropriate method for
 exploring possible relationships. We will use the ropls package to first
 visualize variance in the data using a PCA then to regress the data
-against Iba1.
+against Iba1 using PLSR.
 
 ``` r
 predictor = rmTBI$Iba1
@@ -121,8 +121,8 @@ PLSR = ropls::opls(cytokines,
 #> PLS
 #> 8 samples x 31 variables and 1 response
 #> standard scaling of predictors and response(s)
-#>       R2X(cum) R2Y(cum) Q2(cum) RMSEE pre ort pR2Y  pQ2
-#> Total    0.705    0.889   0.628 0.114   2   0  0.3 0.15
+#>       R2X(cum) R2Y(cum) Q2(cum) RMSEE pre ort pR2Y pQ2
+#> Total    0.705    0.889   0.628 0.114   2   0  0.2 0.1
 ```
 
 ![](tools/README-Run%20PLSR-1.png)
@@ -211,8 +211,8 @@ PLSR_LOOCV = opls_LOOCV(cytokines,
 #> PLS
 #> 8 samples x 31 variables and 1 response
 #> standard scaling of predictors and response(s)
-#>       R2X(cum) R2Y(cum) Q2(cum) RMSEE pre ort pR2Y  pQ2
-#> Total    0.705    0.889   0.628 0.114   2   0 0.15 0.05
+#>       R2X(cum) R2Y(cum) Q2(cum) RMSEE pre ort pR2Y pQ2
+#> Total    0.705    0.889   0.628 0.114   2   0 0.35 0.1
 ```
 
 ![](tools/README-PLSR%20with%20LOOCV-1.png)
@@ -259,3 +259,140 @@ loadings_chart_sd(loadings=PLSR_LOOCV_rot30$P1,
     #> [29,] 34.3
     #> [30,] 35.5
     #> [31,] 36.7
+
+Finally, we can assess the performance of the PLSR by computing a
+regression of Iba1 with scores on LV1. We can show this graphically
+using scatter_reg():
+
+``` r
+scatter_reg(x=PLSR_LOOCV_rot30$T1,y=predictor,
+            xlab = "Scores on LV1",
+            ylab = "Iba1 [a.u.]",
+            title = "LV1 vs Iba1")
+#> `geom_smooth()` using formula 'y ~ x'
+```
+
+![](tools/README-Scatter_reg-1.png)
+
+## Linear Range Analysis
+
+Assessing the linear range of detection for multiplex ELISA kits is a
+key quality control step that must be completed before sample
+measurement. In short, the user selects a single sample and loads
+increasing amounts of lysate into multiple assay wells. After completion
+of the ELISA, the expected result is that increased total protein
+loading correlates with increased detection of each protein. For
+proteins that do not show this linear increase in detection with
+increases in loading, they are considered to be outside of the
+detectable linear range for the chosen loadings.
+
+Let’s load some example linear range data to explore. The first column
+contains values for mass of total protein \[ug\] and each subsequent
+column contains detected fluorescent values \[a.u.\] of a
+phospho-protein from our MAPK Luminex assay.
+
+``` r
+data(LinearRange)
+
+LinearRange
+#> # A tibble: 8 x 10
+#>    Mass pAtf2 pMek1  pJnk `p-p90 RSK` `p-p38` `pErk1/2` pHSP27 pStat3 `p-p53`
+#>   <dbl> <dbl> <dbl> <dbl>       <dbl>   <dbl>     <dbl>  <dbl>  <dbl>   <dbl>
+#> 1   0      43  13.5     7           9    18        14       15   12      12  
+#> 2   0.5    64  28       8          14    18.5      15       21   17      11  
+#> 3   1      74  53       9          12    19        15       21   17      12  
+#> 4   1.5    87  58.5    10          13    17.5      15       23   16.5    13  
+#> 5   2      88  57      10          13    17        16       21   20      12  
+#> 6   3     132  75      11          14    19        15.5     24   20      13  
+#> 7   4     134  68      11          13    18        17       28   21      13  
+#> 8   6     155  70      11          16    18        19       26   23      12.5
+```
+
+First, let’s construct an x-y scatter graph for a single measured
+phospho-protein to see the relationship between detected analyte and
+loaded total protein using scatter_reg():
+
+``` r
+scatter_reg(x=LinearRange$Mass,y=LinearRange$pJnk,
+            xlab="Protein Mass [ug]",ylab="pJnk [a.u.]",
+            showRSQ=FALSE,showP=FALSE,
+            method="loess")
+#> `geom_smooth()` using formula 'y ~ x'
+```
+
+![](tools/README-Scatter%20Graph-1.png)
+
+The most important outcome from your linear range will be the amount of
+protein to load in your subsequent assays. You will want to look at the
+linear range of ALL measured proteins and select the loading which is
+appropriate for the highest number of proteins of interest. We can do
+this easily using LinearRangePanel().
+
+``` r
+loadings = LinearRange$Mass
+analytes = LinearRange[,2:10]
+
+LinearRangePanel(analytes = analytes,loadings = loadings,xlab = "Protein Mass [ug]")
+#> `geom_smooth()` using formula 'y ~ x'
+#> `geom_smooth()` using formula 'y ~ x'
+#> `geom_smooth()` using formula 'y ~ x'
+#> `geom_smooth()` using formula 'y ~ x'
+#> `geom_smooth()` using formula 'y ~ x'
+#> `geom_smooth()` using formula 'y ~ x'
+#> `geom_smooth()` using formula 'y ~ x'
+#> `geom_smooth()` using formula 'y ~ x'
+#> `geom_smooth()` using formula 'y ~ x'
+```
+
+![](tools/README-Linear%20Range%20Panel-1.png)
+
+    #> TableGrob (4 x 3) "arrange": 10 grobs
+    #>           z     cells    name                grob
+    #> analyte1  1 (2-2,1-1) arrange      gtable[layout]
+    #> analyte2  2 (2-2,2-2) arrange      gtable[layout]
+    #> analyte3  3 (2-2,3-3) arrange      gtable[layout]
+    #> analyte4  4 (3-3,1-1) arrange      gtable[layout]
+    #> analyte5  5 (3-3,2-2) arrange      gtable[layout]
+    #> analyte6  6 (3-3,3-3) arrange      gtable[layout]
+    #> analyte7  7 (4-4,1-1) arrange      gtable[layout]
+    #> analyte8  8 (4-4,2-2) arrange      gtable[layout]
+    #> analyte9  9 (4-4,3-3) arrange      gtable[layout]
+    #>          10 (1-1,1-3) arrange text[GRID.text.744]
+
+We selected a loading of 1ug, which we can display on the graphs to help
+assess its suitability:
+
+``` r
+loadings = LinearRange$Mass
+analytes = LinearRange[,2:10]
+
+LinearRangePanel(analytes = analytes,loadings = loadings,xlab = "Protein Mass [ug]",xintercept = 1)
+#> `geom_smooth()` using formula 'y ~ x'
+#> `geom_smooth()` using formula 'y ~ x'
+#> `geom_smooth()` using formula 'y ~ x'
+#> `geom_smooth()` using formula 'y ~ x'
+#> `geom_smooth()` using formula 'y ~ x'
+#> `geom_smooth()` using formula 'y ~ x'
+#> `geom_smooth()` using formula 'y ~ x'
+#> `geom_smooth()` using formula 'y ~ x'
+#> `geom_smooth()` using formula 'y ~ x'
+```
+
+![](tools/README-Linear%20Range%20Panel%20vline-1.png)
+
+    #> TableGrob (4 x 3) "arrange": 10 grobs
+    #>           z     cells    name                 grob
+    #> analyte1  1 (2-2,1-1) arrange       gtable[layout]
+    #> analyte2  2 (2-2,2-2) arrange       gtable[layout]
+    #> analyte3  3 (2-2,3-3) arrange       gtable[layout]
+    #> analyte4  4 (3-3,1-1) arrange       gtable[layout]
+    #> analyte5  5 (3-3,2-2) arrange       gtable[layout]
+    #> analyte6  6 (3-3,3-3) arrange       gtable[layout]
+    #> analyte7  7 (4-4,1-1) arrange       gtable[layout]
+    #> analyte8  8 (4-4,2-2) arrange       gtable[layout]
+    #> analyte9  9 (4-4,3-3) arrange       gtable[layout]
+    #>          10 (1-1,1-3) arrange text[GRID.text.1150]
+
+In this example, we would have high confidence in measured values for
+pAtf2, pMek1, pJnk, pErk1/2, pHSP27, and pStat3. p-p38 is outside of its
+detectable linear range.
