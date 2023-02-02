@@ -44,7 +44,6 @@ head(rmTBI[,1:8],6)
 
 This data set is derived from eight mice (8 rows) that received three rmTBI. We measured 32 different proteins (32 columns) after injury and were interested in whether one of the proteins, Iba1 (a microglial activation marker), correlated with the rest of the measured proteins. The other 31 proteins are cytokines, immune signaling proteins. Let's take our first look at the data by creating a heatmap:
 
-
 ```{r Heatmap, fig.width=6, fig.height=4, warning=FALSE}
 hm = heatmap_wl(rmTBI,
                 mar=c(10,2),  # set margins to re-size the heatmap
@@ -150,10 +149,9 @@ scatter_reg(x=PLSR_LOOCV_rot30$T1,y=predictor,
             title = "LV1 vs Iba1")
 ```
 
-
 ## Linear Range Analysis
 
-Assessing the linear range of detection for multiplex ELISA kits is a key quality control step that must be completed before sample measurement. In short, the user selects a single sample and loads increasing amounts of lysate into multiple assay wells. After completion of the ELISA, the expected result is that increased total protein loading correlates with increased detection of each protein. For proteins that do not show this linear increase in detection with increases in loading, they are considered to be outside of the detectable linear range for the chosen loadings. 
+Assessing the linear range of detection for multiplex ELISA kits is a key quality control step that must be completed before sample measurement. In short, the user selects a single sample and loads increasing amounts of lysate into multiple assay wells. After completion of the ELISA, the expected result is that increased total protein loading correlates with increased detection of each protein. For proteins that do not show this linear increase in detection with increases in loading, they are considered to be outside of the detectable linear range for the chosen loadings.
 
 Let's load some example linear range data to explore. The first column contains values for mass of total protein [ug] and each subsequent column contains detected fluorescent values [a.u.] of a phospho-protein from our MAPK Luminex assay.
 
@@ -173,14 +171,13 @@ scatter_reg(x=LinearRange$Mass,y=LinearRange$pJnk,
 
 ```
 
-
 The most important outcome from your linear range will be the amount of protein to load in your subsequent assays. You will want to look at the linear range of ALL measured proteins and select the loading which is appropriate for the highest number of proteins of interest. We can do this easily using LinearRangePanel().
 
 ```{r Linear Range Panel, fig.height=10,fig.width=12}
 loadings = LinearRange$Mass
 analytes = LinearRange[,2:10]
 
-LinearRangePanel(analytes = analytes,loadings = loadings,xlab = "Protein Mass [ug]")
+panel = LinearRangePanel(analytes = analytes,loadings = loadings,xlab = "Protein Mass [ug]")
 
 ```
 
@@ -190,10 +187,8 @@ We selected a loading of 1ug, which we can display on the graphs to help assess 
 loadings = LinearRange$Mass
 analytes = LinearRange[,2:10]
 
-LinearRangePanel(analytes = analytes,loadings = loadings,xlab = "Protein Mass [ug]",xintercept = 1)
+panel = LinearRangePanel(analytes = analytes,loadings = loadings,xlab = "Protein Mass [ug]",xintercept = 1)
 
 ```
 
 In this example, we would have high confidence in measured values for pAtf2, pMek1, pJnk, pErk1/2, pHSP27, and pStat3. p-p38 is outside of its detectable linear range.
-
-

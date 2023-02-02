@@ -122,7 +122,7 @@ PLSR = ropls::opls(cytokines,
 #> 8 samples x 31 variables and 1 response
 #> standard scaling of predictors and response(s)
 #>       R2X(cum) R2Y(cum) Q2(cum) RMSEE pre ort pR2Y pQ2
-#> Total    0.705    0.889   0.628 0.114   2   0  0.2 0.1
+#> Total    0.705    0.889   0.628 0.114   2   0 0.25 0.1
 ```
 
 ![](tools/README-Run%20PLSR-1.png)
@@ -212,7 +212,7 @@ PLSR_LOOCV = opls_LOOCV(cytokines,
 #> 8 samples x 31 variables and 1 response
 #> standard scaling of predictors and response(s)
 #>       R2X(cum) R2Y(cum) Q2(cum) RMSEE pre ort pR2Y pQ2
-#> Total    0.705    0.889   0.628 0.114   2   0 0.35 0.1
+#> Total    0.705    0.889   0.628 0.114   2   0  0.2 0.1
 ```
 
 ![](tools/README-PLSR%20with%20LOOCV-1.png)
@@ -332,7 +332,7 @@ this easily using LinearRangePanel().
 loadings = LinearRange$Mass
 analytes = LinearRange[,2:10]
 
-LinearRangePanel(analytes = analytes,loadings = loadings,xlab = "Protein Mass [ug]")
+panel = LinearRangePanel(analytes = analytes,loadings = loadings,xlab = "Protein Mass [ug]")
 #> `geom_smooth()` using formula 'y ~ x'
 #> `geom_smooth()` using formula 'y ~ x'
 #> `geom_smooth()` using formula 'y ~ x'
@@ -346,19 +346,6 @@ LinearRangePanel(analytes = analytes,loadings = loadings,xlab = "Protein Mass [u
 
 ![](tools/README-Linear%20Range%20Panel-1.png)
 
-    #> TableGrob (4 x 3) "arrange": 10 grobs
-    #>           z     cells    name                grob
-    #> analyte1  1 (2-2,1-1) arrange      gtable[layout]
-    #> analyte2  2 (2-2,2-2) arrange      gtable[layout]
-    #> analyte3  3 (2-2,3-3) arrange      gtable[layout]
-    #> analyte4  4 (3-3,1-1) arrange      gtable[layout]
-    #> analyte5  5 (3-3,2-2) arrange      gtable[layout]
-    #> analyte6  6 (3-3,3-3) arrange      gtable[layout]
-    #> analyte7  7 (4-4,1-1) arrange      gtable[layout]
-    #> analyte8  8 (4-4,2-2) arrange      gtable[layout]
-    #> analyte9  9 (4-4,3-3) arrange      gtable[layout]
-    #>          10 (1-1,1-3) arrange text[GRID.text.744]
-
 We selected a loading of 1ug, which we can display on the graphs to help
 assess its suitability:
 
@@ -366,7 +353,7 @@ assess its suitability:
 loadings = LinearRange$Mass
 analytes = LinearRange[,2:10]
 
-LinearRangePanel(analytes = analytes,loadings = loadings,xlab = "Protein Mass [ug]",xintercept = 1)
+panel = LinearRangePanel(analytes = analytes,loadings = loadings,xlab = "Protein Mass [ug]",xintercept = 1)
 #> `geom_smooth()` using formula 'y ~ x'
 #> `geom_smooth()` using formula 'y ~ x'
 #> `geom_smooth()` using formula 'y ~ x'
@@ -379,19 +366,6 @@ LinearRangePanel(analytes = analytes,loadings = loadings,xlab = "Protein Mass [u
 ```
 
 ![](tools/README-Linear%20Range%20Panel%20vline-1.png)
-
-    #> TableGrob (4 x 3) "arrange": 10 grobs
-    #>           z     cells    name                 grob
-    #> analyte1  1 (2-2,1-1) arrange       gtable[layout]
-    #> analyte2  2 (2-2,2-2) arrange       gtable[layout]
-    #> analyte3  3 (2-2,3-3) arrange       gtable[layout]
-    #> analyte4  4 (3-3,1-1) arrange       gtable[layout]
-    #> analyte5  5 (3-3,2-2) arrange       gtable[layout]
-    #> analyte6  6 (3-3,3-3) arrange       gtable[layout]
-    #> analyte7  7 (4-4,1-1) arrange       gtable[layout]
-    #> analyte8  8 (4-4,2-2) arrange       gtable[layout]
-    #> analyte9  9 (4-4,3-3) arrange       gtable[layout]
-    #>          10 (1-1,1-3) arrange text[GRID.text.1150]
 
 In this example, we would have high confidence in measured values for
 pAtf2, pMek1, pJnk, pErk1/2, pHSP27, and pStat3. p-p38 is outside of its
