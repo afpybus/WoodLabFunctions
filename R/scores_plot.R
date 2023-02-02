@@ -1,4 +1,4 @@
-#Used to create scores plot colored by categorical variable of interest, saved to working directory. No output.
+#Used to create scores plot colored by categorical variable of interest.
 scores_plot <- function(T1,T2,color,color.str="",analysis="PLSDA",plot.title=NULL){
   
   if (!require("tidyverse")) install.packages("tidyverse")

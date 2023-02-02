@@ -1,4 +1,4 @@
-#Used to rotate scores and loadings by specified degrees, then perform axis swaps and/or flips. Output is list of scores, loadings, and rotation matrix.
+#Used to rotate scores and loadings on opls objects by specified degrees, then perform axis swaps and/or flips. Output is list of scores, loadings, and rotation matrix.
 rotate_opls <- function(plsOut,degrees,swap=F,flip1=F,flip2=F){
   #rotate by specified degrees
   theta=degrees*pi/180
