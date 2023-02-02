@@ -163,7 +163,7 @@ LinearRange
 
 First, let's construct an x-y scatter graph for a single measured phospho-protein to see the relationship between detected analyte and loaded total protein using scatter_reg():
 
-```{r Scatter Graph, fig.width=4,fig.height=4}
+```{r Scatter Graph, fig.width=4,fig.height=4,message=FALSE}
 scatter_reg(x=LinearRange$Mass,y=LinearRange$pJnk,
             xlab="Protein Mass [ug]",ylab="pJnk [a.u.]",
             showRSQ=FALSE,showP=FALSE,
@@ -173,7 +173,7 @@ scatter_reg(x=LinearRange$Mass,y=LinearRange$pJnk,
 
 The most important outcome from your linear range will be the amount of protein to load in your subsequent assays. You will want to look at the linear range of ALL measured proteins and select the loading which is appropriate for the highest number of proteins of interest. We can do this easily using LinearRangePanel().
 
-```{r Linear Range Panel, fig.height=10,fig.width=12}
+```{r Linear Range Panel, fig.height=10,fig.width=12,message=FALSE}
 loadings = LinearRange$Mass
 analytes = LinearRange[,2:10]
 
@@ -183,7 +183,7 @@ panel = LinearRangePanel(analytes = analytes,loadings = loadings,xlab = "Protein
 
 We selected a loading of 1ug, which we can display on the graphs to help assess its suitability:
 
-```{r Linear Range Panel vline, fig.height=10,fig.width=12}
+```{r Linear Range Panel vline, fig.height=10,fig.width=12,message=FALSE}
 loadings = LinearRange$Mass
 analytes = LinearRange[,2:10]
 

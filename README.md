@@ -122,7 +122,7 @@ PLSR = ropls::opls(cytokines,
 #> 8 samples x 31 variables and 1 response
 #> standard scaling of predictors and response(s)
 #>       R2X(cum) R2Y(cum) Q2(cum) RMSEE pre ort pR2Y pQ2
-#> Total    0.705    0.889   0.628 0.114   2   0 0.25 0.1
+#> Total    0.705    0.889   0.628 0.114   2   0  0.4 0.1
 ```
 
 ![](tools/README-Run%20PLSR-1.png)
@@ -212,7 +212,7 @@ PLSR_LOOCV = opls_LOOCV(cytokines,
 #> 8 samples x 31 variables and 1 response
 #> standard scaling of predictors and response(s)
 #>       R2X(cum) R2Y(cum) Q2(cum) RMSEE pre ort pR2Y pQ2
-#> Total    0.705    0.889   0.628 0.114   2   0  0.2 0.1
+#> Total    0.705    0.889   0.628 0.114   2   0 0.15 0.1
 ```
 
 ![](tools/README-PLSR%20with%20LOOCV-1.png)
@@ -317,7 +317,6 @@ scatter_reg(x=LinearRange$Mass,y=LinearRange$pJnk,
             xlab="Protein Mass [ug]",ylab="pJnk [a.u.]",
             showRSQ=FALSE,showP=FALSE,
             method="loess")
-#> `geom_smooth()` using formula 'y ~ x'
 ```
 
 ![](tools/README-Scatter%20Graph-1.png)
@@ -333,15 +332,6 @@ loadings = LinearRange$Mass
 analytes = LinearRange[,2:10]
 
 panel = LinearRangePanel(analytes = analytes,loadings = loadings,xlab = "Protein Mass [ug]")
-#> `geom_smooth()` using formula 'y ~ x'
-#> `geom_smooth()` using formula 'y ~ x'
-#> `geom_smooth()` using formula 'y ~ x'
-#> `geom_smooth()` using formula 'y ~ x'
-#> `geom_smooth()` using formula 'y ~ x'
-#> `geom_smooth()` using formula 'y ~ x'
-#> `geom_smooth()` using formula 'y ~ x'
-#> `geom_smooth()` using formula 'y ~ x'
-#> `geom_smooth()` using formula 'y ~ x'
 ```
 
 ![](tools/README-Linear%20Range%20Panel-1.png)
@@ -354,15 +344,6 @@ loadings = LinearRange$Mass
 analytes = LinearRange[,2:10]
 
 panel = LinearRangePanel(analytes = analytes,loadings = loadings,xlab = "Protein Mass [ug]",xintercept = 1)
-#> `geom_smooth()` using formula 'y ~ x'
-#> `geom_smooth()` using formula 'y ~ x'
-#> `geom_smooth()` using formula 'y ~ x'
-#> `geom_smooth()` using formula 'y ~ x'
-#> `geom_smooth()` using formula 'y ~ x'
-#> `geom_smooth()` using formula 'y ~ x'
-#> `geom_smooth()` using formula 'y ~ x'
-#> `geom_smooth()` using formula 'y ~ x'
-#> `geom_smooth()` using formula 'y ~ x'
 ```
 
 ![](tools/README-Linear%20Range%20Panel%20vline-1.png)
