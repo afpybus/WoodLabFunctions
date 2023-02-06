@@ -97,6 +97,8 @@ scores_plot_ellipse <- function(T1,T2,color,color.str="",analysis="Scores Plot",
   axis.label="Component "
   if(analysis=="PCA"){axis.label="PC"}
   if(analysis=="PLS"){axis.label="LV"}
+  if(analysis=="tSNE"){axis.label="tSNE"}
+  if(analysis=="UMAP"){axis.label="UMAP"}
   ScoresPlot=data.frame(T1,T2,as.factor(color))
   colnames(ScoresPlot)=c("T1","T2","color")
   plotOut <- ggplot(ScoresPlot, aes(x=T1, y=T2, color=as.factor(color))) + 
