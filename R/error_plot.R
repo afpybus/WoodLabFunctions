@@ -11,7 +11,7 @@
 #' @export
 error_plot <- function(x,y,color=x,xlab="",ylab="",color.str="",title=ylab,
                        axis.text.x.size=20,axis.text.y.size=20,axis.text.x.angle=90,title.size=20,text.size=20){
-  dataPlot <- data.frame(factor(x),y,factor(colors))
+  dataPlot <- data.frame(factor(x),y,factor(color))
   colnames(dataPlot)=c("x_dot","y_dot","colors_dot")
   plotOut <- ggplot(dataPlot,aes(x=x_dot,y=y_dot))+
     geom_jitter(size=4,aes(color=color))+
