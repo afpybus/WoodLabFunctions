@@ -2,6 +2,7 @@
 
 export(LinearRangePanel)
 export(color.bar)
+export(error_plot)
 export(heatmap_wl)
 export(heatmap_wl_sidebar)
 export(loadings_chart)
