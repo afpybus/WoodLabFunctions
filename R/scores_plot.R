@@ -14,6 +14,8 @@ scores_plot <- function(T1,T2,color,color.str="",analysis="Scores Plot",plot.tit
   axis.label="Component "
   if(analysis=="PCA"){axis.label="PC"}
   if(analysis=="PLS"){axis.label="LV"}
+  if(analysis=="tSNE"){axis.label="tSNE"}
+  if(analysis=="UMAP"){axis.label="UMAP"}
   ScoresPlot=data.frame(T1,T2,as.factor(color))
   colnames(ScoresPlot)=c("T1","T2","color")
   plotOut <- ggplot(ScoresPlot, aes(x=T1, y=T2, color=as.factor(color))) + 
@@ -53,6 +55,8 @@ scores_plot_gradient <- function(T1,T2,color,color.str="",analysis="Scores Plot"
   axis.label="Component "
   if(analysis=="PCA"){axis.label="PC"}
   if(analysis=="PLS"){axis.label="LV"}
+  if(analysis=="tSNE"){axis.label="tSNE"}
+  if(analysis=="UMAP"){axis.label="UMAP"}
   breakBarColors=c(-200,seq(-1.5, 1.5, 0.01),200) #Outside numbers clip outliers. This is for zscoring.
   barColors = gplots::colorpanel(length(breakBarColors)-1, "blue", "white", "red2")
   sc = scale_colour_gradientn(colours = barColors, limits=c(min(color), max(color)))
