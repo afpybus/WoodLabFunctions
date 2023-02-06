@@ -15,7 +15,7 @@ error_plot <- function(x,y,color=x,xlab="",ylab="",color.str="",title=ylab,
   colnames(dataPlot)=c("x_dot","y_dot","colors_dot")
   plotOut <- ggplot(dataPlot,aes(x=x_dot,y=y_dot))+
     geom_jitter(size=4,aes(color=color))+
-    stat_summary(geom="errorbar",color="black",size=1.5,aes(width=0.3),)+
+    stat_summary(geom="errorbar",fun.data = mean_se,color="black",size=1.5,aes(width=0.3),)+
     stat_summary(fun = "mean", geom="point", size=4,show.legend = F, color="black") +
     theme(panel.background = element_rect(fill = 'transparent'),
           panel.grid.major=element_blank(),
