@@ -70,8 +70,8 @@ error_plot_gradient <- function(x,y,color=y,xlab="",ylab="",color.str="",title=y
           axis.text.y = element_text( color = "black",
                                       size = axis.text.y.size),
           plot.title=element_text(hjust=0.5,face = "bold",size=title.size))+
-    xlab(x_str)+
-    ylab(y_str)+
+    xlab(xlab)+
+    ylab(ylab)+
     ggtitle(paste(title))+
     scale_color_gradient2(low=low, mid=mid,high=high, space ="Lab",name=color.str)
   return(plotOut)
